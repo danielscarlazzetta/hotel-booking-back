@@ -76,6 +76,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 $ npm install @nestjs/jwt @nestjs/passport passport passport-jwt bcrypt 
 $ npm install @prisma/client
 $ npm install prisma --save-dev
+$ @nestjs/config
+$ npm install passport-local
+npm install @types/passport-local --save-dev
 ```
 docker-compose up -d
 npx prisma migrate dev --name init
