@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
-
+import { RegisterDto } from './dto/register.dto';
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
@@ -24,12 +24,20 @@ export class AuthService {
     };
   }
 
-  async register(email: string, password: string) {
-    const hashedPassword = await bcrypt.hash(password, 10);
+  async register(registerDto: RegisterDto) {
+    const hashedPassword = await bcrypt.hash(registerDto.password, 10);
     return this.prisma.user.create({
       data: {
-        email,
+        email: registerDto.email,
         password: hashedPassword,
+        rut: registerDto.rut,
+        fist_name: registerDto.fist_name,
+        second_name: registerDto.second_name,
+        phone_number: registerDto.phone_number,
+        region: registerDto.region,
+        comuna: registerDto.comuna,
+        address: registerDto.address,
+        number_home: registerDto.number_home,
       },
     });
   }
